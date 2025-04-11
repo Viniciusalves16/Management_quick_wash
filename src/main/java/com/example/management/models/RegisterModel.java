@@ -13,7 +13,6 @@ public class RegisterModel implements Serializable {
 
     private static  final  long serialVersionUID = 1l;
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idCustomer;
