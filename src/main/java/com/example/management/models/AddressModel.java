@@ -1,19 +1,30 @@
 package com.example.management.models;
 
+import com.example.management.dto.AddressDto;
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.*;
+
+import java.io.Serializable;
+
 @Embeddable
-@Data
-@Table(name = "TB_ADDRESS")
-public class AddressModel {
+@Getter
+@Setter
+@AllArgsConstructor
+public class AddressModel  implements Serializable {
+    private static final long serialVersionUID = 1L;
 
+    private String cep;
+    private String rua;
+    private String cidade;
+    private String numero;
 
-    private String code;
-    private String street;
-    private String district;
-    private String city;
-    private String number;
-    private String complement;
+    public AddressModel(AddressDto addressDto) {
+        this.cep = addressDto.code();
+        this.rua = addressDto.street();
+        this.cidade = addressDto.city();
+        this.numero = addressDto.number();
+    }
+
+    public AddressModel() {
+    }
 }
