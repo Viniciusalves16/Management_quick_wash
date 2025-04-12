@@ -3,6 +3,7 @@ package com.example.management.models;
 import com.example.management.dto.RequestRegisterDto;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
 import org.springframework.web.service.annotation.GetExchange;
 
 import java.io.Serializable;
@@ -13,7 +14,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "customers")
 @AllArgsConstructor
-public class RegisterModel  implements Serializable {
+public class RegisterModel extends RepresentationModel<RegisterModel> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -33,4 +34,9 @@ public class RegisterModel  implements Serializable {
 
     public RegisterModel() {
     }
+
+    public RegisterModel(UUID idCustomer) {
+        this.idCustomer = idCustomer;
+    }
+
 }
