@@ -2,7 +2,7 @@ package com.example.management.service;
 
 import com.example.management.controller.RegisterController;
 import com.example.management.dto.RequestRegisterDto;
-import com.example.management.models.RegisterModel;
+import com.example.management.entities.Register;
 import com.example.management.repository.RegisterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,26 +25,29 @@ public class RegisterService {
 
     public ResponseEntity saveRegisterService(RequestRegisterDto registerDto) {
 
-        var registerModelTemp = new RegisterModel(registerDto);
+        var registerModelTemp = new Register(registerDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(registerRepository.save(registerModelTemp));
     }
 
 
-    public ResponseEntity<List<RegisterModel>> findAllService() {
-        List<RegisterModel> registerModels = registerRepository.findAll();
+    public ResponseEntity<List<Register>> findAllService() {
+        List<Register> registerModels = registerRepository.findAll();
 
         if (!registerModels.isEmpty()) {
-            for (RegisterModel registerModel : registerModels) {
-                UUID id = registerModel.getIdCustomer();
+            for (Register registerModel : registerModels) {
+                UUID id = registerModel.getCustomerId();
                 registerModel.add(linkTo(methodOn(RegisterController.class).getOneRegister(id)).withSelfRel());
             }
+            return ResponseEntity.status(HttpStatus.OK).body(registerModels);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(registerModels);
+
     }
 
 
     public ResponseEntity<Object> getOneRegisterService(UUID id) {
-        Optional<RegisterModel> registerModel = registerRepository.findById(id);
+        Optional<Register> registerModel = registerRepository.findById(id);
         if (registerModel.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Register Not Found ");
         }
@@ -52,25 +55,25 @@ public class RegisterService {
     }
 
     public ResponseEntity<Object> updateRegisterService(UUID id, RequestRegisterDto request) {
-        Optional<RegisterModel> registerModel = registerRepository.findById(id);
+        Optional<Register> registerModel = registerRepository.findById(id);
 
         if (registerModel.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Register Not Found ");
         }
-        RegisterModel updateRegister = new RegisterModel(request);
-        updateRegister.setIdCustomer(id);
+        Register updateRegister = new Register(request);
+        updateRegister.setCustomerId(id);
 
         return ResponseEntity.status(HttpStatus.OK).body(updateRegister);
     }
 
-    public ResponseEntity<Object> deleteRegisterService( UUID id) {
-        Optional<RegisterModel> findRegisterId = registerRepository.findById(id);
+    public ResponseEntity<Object> deleteRegisterService(UUID id) {
+        Optional<Register> findRegisterId = registerRepository.findById(id);
 
         if (findRegisterId.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("register not found");
         }
         registerRepository.delete(findRegisterId.get());
-        return  ResponseEntity.status(HttpStatus.OK).body("Register deleted Sucessfully");
+        return ResponseEntity.status(HttpStatus.OK).body("Register deleted Sucessfully");
     }
 
 }

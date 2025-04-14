@@ -1,10 +1,9 @@
-package com.example.management.models;
+package com.example.management.entities;
 
 import com.example.management.dto.RequestRegisterDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
-import org.springframework.web.service.annotation.GetExchange;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -14,29 +13,30 @@ import java.util.UUID;
 @Entity
 @Table(name = "customers")
 @AllArgsConstructor
-public class RegisterModel extends RepresentationModel<RegisterModel> implements Serializable {
+public class Register extends RepresentationModel<Register> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idCustomer;
+    @Column(name = "customer_id")
+    private UUID customerId;
     private String nome;
     private int idade;
 
     @Embedded
-    private AddressModel addressModel;
+    private Address addressModel;
 
-    public RegisterModel(RequestRegisterDto registerDto) {
+    public Register(RequestRegisterDto registerDto) {
         this.nome = registerDto.name();
         this.idade = registerDto.age();
-        this.addressModel = new AddressModel(registerDto.addressDto());
+        this.addressModel = new Address(registerDto.addressDto());
     }
 
-    public RegisterModel() {
+    public Register() {
     }
 
-    public RegisterModel(UUID idCustomer) {
-        this.idCustomer = idCustomer;
+    public Register(UUID idCustomer) {
+        this.customerId = idCustomer;
     }
 
 }
