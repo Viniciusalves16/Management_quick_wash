@@ -1,4 +1,4 @@
-package com.example.management.models;
+package com.example.management.entities;
 
 import com.example.management.dto.AddressDto;
 import jakarta.persistence.Embeddable;
@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @AllArgsConstructor
-public class AddressModel  implements Serializable {
+public class Address implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String cep;
@@ -18,13 +18,13 @@ public class AddressModel  implements Serializable {
     private String cidade;
     private String numero;
 
-    public AddressModel(AddressDto addressDto) {
+    public Address(AddressDto addressDto) {
         this.cep = addressDto.code();
         this.rua = addressDto.street();
         this.cidade = addressDto.city();
         this.numero = addressDto.number();
     }
 
-    public AddressModel() {
+    public Address() {
     }
 }
