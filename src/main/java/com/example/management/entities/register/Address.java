@@ -19,7 +19,7 @@ public class Address implements Serializable {
     private Integer numero;
 
     public Address(AddressDto addressDto) {
-        this.cep = addressDto.code();
+        this.cep = addressDto.postalCode();
         this.rua = addressDto.street();
         this.cidade = addressDto.city();
         this.numero = addressDto.number();
