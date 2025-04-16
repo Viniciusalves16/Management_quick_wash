@@ -5,8 +5,9 @@ import lombok.Getter;
 @Getter
 public enum RoleType {
 
-    BASIC(1, "Basic User"),
-    ADMIN(2, "Administrator");
+    NORMAL(1, "Normal User "),
+    SIMPLE_USER(2, "Simple User "),
+    ADMIN(3, "Administrator");
 
     private final int roleId;
     private final String description;

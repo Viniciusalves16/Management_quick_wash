@@ -2,7 +2,7 @@ package com.example.management.service;
 
 import com.example.management.controller.RegisterController;
 import com.example.management.dto.RequestRegisterDto;
-import com.example.management.entities.Register;
+import com.example.management.entities.register.Register;
 import com.example.management.repository.RegisterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +32,6 @@ public class RegisterService {
 
     public ResponseEntity<List<Register>> findAllService() {
         List<Register> registerModels = registerRepository.findAll();
-
         if (!registerModels.isEmpty()) {
             for (Register registerModel : registerModels) {
                 UUID id = registerModel.getCustomerId();
@@ -47,7 +46,7 @@ public class RegisterService {
 
 
     public ResponseEntity<Object> getOneRegisterService(UUID id) {
-        Optional<Register> registerModel = registerRepository.findById(id);
+      var registerModel = registerRepository.findById(id);
         if (registerModel.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Register Not Found ");
         }

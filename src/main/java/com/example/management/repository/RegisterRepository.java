@@ -1,6 +1,6 @@
 package com.example.management.repository;
 
-import com.example.management.entities.Register;
+import com.example.management.entities.register.Register;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

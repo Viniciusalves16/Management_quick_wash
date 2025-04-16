@@ -1,6 +1,6 @@
 package com.example.management.repository;
 
-import com.example.management.entities.Role;
+import com.example.management.entities.login.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

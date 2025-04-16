@@ -1,4 +1,12 @@
 package com.example.management.dto;
 
-public record AddressDto(String code, String street, String district, String city, String number, String complement) {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+public record AddressDto(@NotBlank String code,
+                         @NotBlank String street,
+                         @NotBlank String district,
+                         @NotBlank String city,
+                         @NotNull Integer number,
+                         @NotBlank String complement) {
 }

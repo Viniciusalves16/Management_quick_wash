@@ -1,4 +1,4 @@
-package com.example.management.entities;
+package com.example.management.entities.register;
 
 import com.example.management.dto.RequestRegisterDto;
 import jakarta.persistence.*;

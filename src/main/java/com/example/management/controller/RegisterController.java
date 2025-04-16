@@ -1,7 +1,7 @@
 package com.example.management.controller;
 
 import com.example.management.dto.RequestRegisterDto;
-import com.example.management.entities.Register;
+import com.example.management.entities.register.Register;
 import com.example.management.service.RegisterService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -22,7 +22,7 @@ public class RegisterController {
 
     @PostMapping("/register")
     @Transactional
-    public ResponseEntity<Register> saveRegister(@RequestBody @Valid RequestRegisterDto registerDto) {
+    public ResponseEntity<Register> saveRegister( @RequestBody @Valid RequestRegisterDto registerDto) {
         return registerService.saveRegisterService(registerDto);
     }
 
@@ -38,13 +38,15 @@ public class RegisterController {
     }
 
     @PutMapping("register/{id}")
+    @Transactional
     public ResponseEntity<Object> updateRegister(@PathVariable(value = "id") UUID id,
-                                                 @RequestBody @Valid RequestRegisterDto request) {
+                                                 @Valid   @RequestBody  RequestRegisterDto request) {
         return registerService.updateRegisterService(id, request);
 
     }
 
     @DeleteMapping("/register/{id}")
+    @Transactional
     public ResponseEntity<Object> deteleRegister(@PathVariable(value = "id") UUID id) {
         return registerService.deleteRegisterService(id);
     }

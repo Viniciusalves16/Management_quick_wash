@@ -1,4 +1,4 @@
-package com.example.management.entities;
+package com.example.management.entities.register;
 
 import com.example.management.dto.AddressDto;
 import jakarta.persistence.Embeddable;
@@ -16,7 +16,7 @@ public class Address implements Serializable {
     private String cep;
     private String rua;
     private String cidade;
-    private String numero;
+    private Integer numero;
 
     public Address(AddressDto addressDto) {
         this.cep = addressDto.code();

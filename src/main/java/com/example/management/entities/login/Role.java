@@ -1,4 +1,4 @@
-package com.example.management.entities;
+package com.example.management.entities.login;
 
 import jakarta.persistence.*;
 import lombok.Getter;

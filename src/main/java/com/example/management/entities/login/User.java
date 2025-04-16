@@ -1,4 +1,4 @@
-package com.example.management.entities;
+package com.example.management.entities.login;
 
 
 import jakarta.persistence.*;
@@ -28,6 +28,8 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roleUser;
+
+
 
 
 }
