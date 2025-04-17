@@ -2,6 +2,7 @@ package com.example.management.entities.login;
 
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,7 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "users")
+@EqualsAndHashCode(of = "id")
 public class User {
 
     @Id
@@ -20,7 +22,7 @@ public class User {
     private UUID userId;
 
     @Column(unique = true)
-    private String userName;
+    private String login;
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
