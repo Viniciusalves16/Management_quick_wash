@@ -19,7 +19,7 @@ public class Register extends RepresentationModel<Register> implements Serializa
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "customer_id")
-    private UUID customerId;
+    private Long customerId;
     private String nome;
     private int idade;
 
@@ -35,7 +35,7 @@ public class Register extends RepresentationModel<Register> implements Serializa
     public Register() {
     }
 
-    public Register(UUID idCustomer) {
+    public Register(Long idCustomer) {
         this.customerId = idCustomer;
     }
 

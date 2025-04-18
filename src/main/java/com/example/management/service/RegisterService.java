@@ -34,7 +34,7 @@ public class RegisterService {
         List<Register> registerModels = registerRepository.findAll();
         if (!registerModels.isEmpty()) {
             for (Register registerModel : registerModels) {
-                UUID id = registerModel.getCustomerId();
+                Long id = registerModel.getCustomerId();
                 registerModel.add(linkTo(methodOn(RegisterController.class).getOneRegister(id)).withSelfRel());
             }
             return ResponseEntity.status(HttpStatus.OK).body(registerModels);
@@ -45,7 +45,7 @@ public class RegisterService {
     }
 
 
-    public ResponseEntity<Object> getOneRegisterService(UUID id) {
+    public ResponseEntity<Object> getOneRegisterService(Long id) {
       var registerModel = registerRepository.findById(id);
         if (registerModel.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Register Not Found ");
@@ -53,7 +53,7 @@ public class RegisterService {
         return ResponseEntity.status(HttpStatus.OK).body(registerModel.get());
     }
 
-    public ResponseEntity<Object> updateRegisterService(UUID id, RequestRegisterDto request) {
+    public ResponseEntity<Object> updateRegisterService(Long id, RequestRegisterDto request) {
         Optional<Register> registerModel = registerRepository.findById(id);
 
         if (registerModel.isEmpty()) {
@@ -65,7 +65,7 @@ public class RegisterService {
         return ResponseEntity.status(HttpStatus.OK).body(updateRegister);
     }
 
-    public ResponseEntity<Object> deleteRegisterService(UUID id) {
+    public ResponseEntity<Object> deleteRegisterService(Long id) {
         Optional<Register> findRegisterId = registerRepository.findById(id);
 
         if (findRegisterId.isEmpty()) {

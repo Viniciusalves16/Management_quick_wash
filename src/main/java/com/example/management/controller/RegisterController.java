@@ -33,13 +33,13 @@ public class RegisterController {
 
 
     @GetMapping("register/{id}")
-    public ResponseEntity<Object> getOneRegister(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> getOneRegister(@PathVariable(value = "id") Long id) {
         return registerService.getOneRegisterService(id);
     }
 
     @PutMapping("register/{id}")
     @Transactional
-    public ResponseEntity<Object> updateRegister(@PathVariable(value = "id") UUID id,
+    public ResponseEntity<Object> updateRegister(@PathVariable(value = "id") Long id,
                                                  @Valid   @RequestBody  RequestRegisterDto request) {
         return registerService.updateRegisterService(id, request);
 
@@ -47,7 +47,7 @@ public class RegisterController {
 
     @DeleteMapping("/register/{id}")
     @Transactional
-    public ResponseEntity<Object> deteleRegister(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> deteleRegister(@PathVariable(value = "id") Long id) {
         return registerService.deleteRegisterService(id);
     }
 
