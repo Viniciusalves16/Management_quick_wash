@@ -6,7 +6,6 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.example.management.entities.login.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -21,7 +20,6 @@ public class TokenService {
     public String CreateToken(User user) {
 
         //.withClaim("id", user.getPassword()) // pode ser utilizar para trafegar outros tipos de atributos do usuário
-
 
         //Método que realiza a criação do token
         try {
