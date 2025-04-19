@@ -37,6 +37,6 @@ public class TokenService {
 
     // Método responsável por implementar o tempo de expiração do token
     private Instant dateExpiration() {
-        return LocalDateTime.now().plusMinutes(5).toInstant(ZoneOffset.of("-03:00"));
+        return LocalDateTime.now().plusHours(1).toInstant(ZoneOffset.of("-03:00"));
     }
 }
