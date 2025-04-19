@@ -26,7 +26,7 @@ public class securityConfig {
     }
 
 
-    // Cria a classe Autehtication manager, evitando erro na classe controller
+    // Cria a classe Authehtication manager, evitando erro na classe controller
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();

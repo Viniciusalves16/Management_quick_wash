@@ -23,12 +23,11 @@ public class AutenticationController {
     @Transactional
     public ResponseEntity authenticateUser(@RequestBody @Valid DataAutentication dataAutentication) {
 
-
         // dessa forma é acionado de forma indireta a classe AuthenticationService que realiza a consulta do login no banco de dados
         var token = new UsernamePasswordAuthenticationToken(dataAutentication.login() , dataAutentication.password());
         var authentication = manager.authenticate(token);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("");
     }
 
 }
