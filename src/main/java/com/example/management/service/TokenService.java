@@ -4,17 +4,19 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.example.management.entities.login.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.Date;
-import java.util.Locale;
 
 @Service
 public class TokenService {
+
+    @Value ("${api.quick_wash.security.token.secret}")
+    private String secret;
 
     public String CreateToken(User user) {
 
@@ -23,7 +25,7 @@ public class TokenService {
 
         //Método que realiza a criação do token
         try {
-            var algorithm = Algorithm.HMAC256("1234");
+            var algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
                     .withIssuer("API Management Quick Wash")
                     .withSubject(user.getLogin())
