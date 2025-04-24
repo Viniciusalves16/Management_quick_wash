@@ -40,8 +40,9 @@ public class User implements UserDetails {
     //permite mais personalizações
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return this.roleUser;
     }
+
     @Override
     public String getPassword() {
         return this.password;
