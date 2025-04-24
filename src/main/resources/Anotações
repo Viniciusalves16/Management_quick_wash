@@ -2,6 +2,29 @@ INSERT INTO management_quick_wash.tb_user (user_id, login, password)
 VALUES (UUID_TO_BIN('f8a6c2b1-8a3a-4d51-9c1f-0e6a2b3c4d5e'), 'joao', '$2a$10$Y50UaMFOxteibQEYLrwuHeehHYfcoafCopUazP12.rqB41bsolF5.');
 
 
+INSERT INTO management_quick_wash.tb_role (role_id, name)
+VALUES (UUID_TO_BIN('7b1a9c3e-2d4f-405b-8c6a-3e5f2a1b9c4d'), 'USER');
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 INSERT INTO management_quick_wash.tb_user (user_id, login, password)
 VALUES (UUID_TO_BIN('a1b2c3d4-e5f6-7890-1234-567890abcdef'), 'maria', '$2a$10$Y50UaMFOxteibQEYLrwuHeehHYfcoafCopUazP12.rqB41bsolF5.');
+
+INSERT INTO management_quick_wash.tb_role (role_id, name)
+VALUES (UUID_TO_BIN('1c8d3e7f-4e5a-9b0f-6d4c-8e3a2b1f9c6a'), 'ADMIN');
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+INSERT INTO management_quick_wash.tb_user_tb_role
+VALUES (
+  UUID_TO_BIN('1c8d3e7f-4e5a-9b0f-6d4c-8e3a2b1f9c6a'), -- role_id
+  UUID_TO_BIN('a1b2c3d4-e5f6-7890-1234-567890abcdef')  -- user_id
+);
+
+
+INSERT INTO management_quick_wash.tb_user_tb_role
+VALUES (
+  UUID_TO_BIN('7b1a9c3e-2d4f-405b-8c6a-3e5f2a1b9c4d'), -- role_id
+  UUID_TO_BIN('f8a6c2b1-8a3a-4d51-9c1f-0e6a2b3c4d5e')  -- user_id
+);
+
 
