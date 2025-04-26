@@ -1,11 +1,14 @@
 package com.example.management.entities.login;
 
 
+import com.example.management.enumeration.RoleEnum;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -13,8 +16,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "TB_USER")
 public class UserModel implements UserDetails {
@@ -22,7 +24,7 @@ public class UserModel implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "user_id")
-    private UUID userId;
+    private String userId;
 
     @Column(unique = true)
     private String login;
@@ -30,18 +32,26 @@ public class UserModel implements UserDetails {
     private String password;
 
     // Criando relacionamento entre usuario e roles
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "TB_USER_ROLE",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<RoleModel> roleUser;
+
+    private RoleEnum role;
 
 
-    // metodos implementados pela interface
-    //permite mais personalizações
+    public UserModel() {
+    }
+
+    public UserModel(String login, String encrypted, RoleEnum role) {
+        this.login = login;
+        this.password = encrypted;
+        this.role = role;
+    }
+
+
+    //Verifica se o nível de acesso do usuário é ADMIN ou USER
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        if (this.role == RoleEnum.ADMIN)
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
