@@ -18,3 +18,8 @@ server:
     include:
       stacktrace: never
 
+api:
+  quick_wash:
+    security:
+      token:
+        secret: ${SECRET_TOKEN}
