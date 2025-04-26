@@ -17,30 +17,31 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "TB_USER")
-@EqualsAndHashCode(of = "id")
-public class User implements UserDetails {
+public class UserModel implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "user_id")
     private UUID userId;
 
     @Column(unique = true)
     private String login;
+
     private String password;
 
+    // Criando relacionamento entre usuario e roles
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "TB_USER_TB_ROLE",
+    @JoinTable(name = "TB_USER_ROLE",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roleUser;
+    private Set<RoleModel> roleUser;
 
 
     // metodos implementados pela interface
     //permite mais personalizações
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roleUser;
+        return List.of();
     }
 
     @Override
